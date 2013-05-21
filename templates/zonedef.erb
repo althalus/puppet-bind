@@ -1,0 +1,8 @@
+zone "<%= name %>" {
+    file "<%= zonefile %>";
+    type <% type %>;
+<% if type == "master" -%>
+<% elsif type == "slave" -%>
+    masters { <% @masters.each do |m| %><%= m %>; <% end %> };
+<% end -%>
+}
