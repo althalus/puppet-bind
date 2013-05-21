@@ -7,10 +7,10 @@ define zone (
     exec { "reload-${name}":
         command = "/sbin/rndc-reload ${name}",
         refreshonly => true,
-        unless => "/usr/bin/test ! -f ${bind::zonefile_dir}/{$zonefile}",
+        unless => "/usr/bin/test ! -f ${bind::params::zonefile_dir}/{$zonefile}",
     }
 
-    file { "${bind::zonefile_dir}/${zonefile}":
+    file { "${bind::params::zonefile_dir}/${zonefile}":
         ensure => $ensure,
         owner => 'root',
         group => 'root',
@@ -21,6 +21,7 @@ define zone (
 
     concat::fragment {"named.local_${name}":
         target => "/etc/bind/named.local",
-        content => template("bind/zonedef.erb") 
+        content => template("bind/zonedef.erb"),
+        priority => 15,
     }
 }
