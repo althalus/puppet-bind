@@ -15,7 +15,7 @@ define zone (
         owner => 'root',
         group => 'root',
         mode => '0644',
-        source => 'puppet:///modules/bind/$zonefile',
+        source => 'puppet:///modules/site-bind/$zonefile',
         notify => Exec["reload-${name}"]
     }
 
