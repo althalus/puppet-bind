@@ -12,4 +12,4 @@ Basic usage:
     bind::zone { 'example1.com': }
     bind::zone { 'example2.com': }
     
-This will source the zone files from `puppet:///site-bind/example1.com.dns`
+This will source the zone files from `puppet:///site-bind/example1.com.dns` and `puppet:///site-bind/example2.dns`
