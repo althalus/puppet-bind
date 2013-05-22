@@ -1,8 +1,11 @@
 define zone (
-    $ensure   = 'present',
-    $zonefile = '${name}.dns',
-    $masters  = [],
-    $type     = "master",
+    $ensure       = 'present',
+    $zonefile     = '${name}.dns',
+    $masters      = [],
+    $type         = "master",
+    $allow_update = undef,
+    $allow_query  = undef,
+    $allow_notify = undef,
 ) {
     exec { "reload-${name}":
         command = "/sbin/rndc-reload ${name}",

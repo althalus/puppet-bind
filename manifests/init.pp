@@ -1,5 +1,11 @@
 class bind (
     $package_version = 'installed',
+    $recurion        = 'no',
+    $allow_recursion = [],
+    $listen_on       = [ 'any' ],
+    $listen_on_v6   = [ 'any' ],
+    $allow_transfer  = [],
+    $allow_notify    = [],
 ) inherits bind::params {
     include bind::install
     include bind::service
