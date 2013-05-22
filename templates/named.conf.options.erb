@@ -1,0 +1,34 @@
+// WARNING - This file is managed by puppet. Any changes you make WILL be erased!
+options {
+    directory "/var/cache/bind";
+
+    //========================================================================
+    // If BIND logs error messages about the root key being expired,
+    // you will need to update your keys.  See https://www.isc.org/bind-keys
+    //========================================================================
+    dnssec-validation auto;
+
+    auth-nxdomain no; # conform to RFC1035
+
+    listen-on { <% @listen_on.each do |addr| %><%= addr %>; <% end %> };
+    listen-on-v6 { <% @listen_on_v6.each do |addr| %><%= addr %>; <% end %> };
+
+    recursion <%= @recursion %>;
+    <% if @allow_recursion -%>
+    allow-recursion {
+    <% @allow_recursion.each do |addr| -%>
+        <%= @addr %>;
+    <% end -%>
+    }
+
+    <% if @allow_transfer -%>
+    allow-transfer {
+    <% @allow_transfer.each do |addr| -%>
+        <%= @addr %>;
+    <% end -%>
+    }
+    <% if @notify -%>
+    notify <%= @notify %>
+    <% end -%>
+
+};
